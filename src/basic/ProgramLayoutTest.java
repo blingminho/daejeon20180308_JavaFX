@@ -37,17 +37,26 @@ public class ProgramLayoutTest extends Application {
 		Button button = new Button();
 		button.setText("확 인");
 		
+//		// Button에 대한 이벤트 처리
+//		button.setOnAction(new EventHandler<ActionEvent>() {
+//			
+//			@Override
+//			public void handle(ActionEvent event) {
+//				// 이벤트에 대한 처리 내용을 기술한다
+//				Platform.exit();// 프로그램 종료
+//				System.exit(0);// stop()메서드를 실행하지 않고 프로그램이 끝난다
+//			}
+//			
+//		});
+		
 		// Button에 대한 이벤트 처리
-		button.setOnAction(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent event) {
-				// 이벤트에 대한 처리 내용을 기술한다
-				Platform.exit();// 프로그램 종료
-				System.exit(0);// stop()메서드를 실행하지 않고 프로그램이 끝난다
-			}
-			
-		});
+		button.setOnAction(
+				(ActionEvent event) -> {
+					// 이벤트에 대한 처리 내용을 기술한다
+					Platform.exit();// 프로그램 종료
+					System.exit(0);// stop()메서드를 실행하지 않고 프로그램이 끝난다
+				}
+		);
 		
 		// 생성한 컨트롤들을 컨테이너에 추가하기
 		
