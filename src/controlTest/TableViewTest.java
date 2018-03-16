@@ -50,7 +50,7 @@ public class TableViewTest extends Application {
 		
 		TableColumn<Member, String> telCol = new TableColumn<Member, String>("전화번호");
 		telCol.setCellValueFactory(
-				new PropertyValueFactory<Member, String>("tel")
+				new PropertyValueFactory<Member, String>("teltel")
 		);
 		
 		TableColumn<Member, String> addrCol = new TableColumn<Member, String>("주 소");
@@ -129,7 +129,7 @@ public class TableViewTest extends Application {
 						tfKorName.setText(m.getKorName());
 						tfEngName.setText(m.getEngName());
 						tfAge.setText(String.valueOf(m.getAge()));
-						tfTel.setText(m.getTel());
+						tfTel.setText(m.getTeltel());
 						tfAddr.setText(m.getAddr());
 					}
 				}
@@ -213,18 +213,18 @@ public class TableViewTest extends Application {
 		private String korName;
 		private String engName;
 		private int age;
-		private String tel;
+		private String teltel;
 		private String addr;
 		
 		// 생성자
 		public Member() {}
 
-		public Member(String korName, String engName, int age, String tel, String addr) {
+		public Member(String korName, String engName, int age, String teltel, String addr) {
 			super();
 			this.korName = korName;
 			this.engName = engName;
 			this.age = age;
-			this.tel = tel;
+			this.teltel = teltel;
 			this.addr = addr;
 		}
 
@@ -253,12 +253,12 @@ public class TableViewTest extends Application {
 			this.age = age;
 		}
 
-		public String getTel() {
-			return tel;
+		public String getTeltel() {
+			return teltel;
 		}
 
-		public void setTel(String tel) {
-			this.tel = tel;
+		public void setTeltel(String teltel) {
+			this.teltel = teltel;
 		}
 
 		public String getAddr() {
