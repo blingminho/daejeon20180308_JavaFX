@@ -18,7 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class TabelViewTestMine extends Application {
+public class TableViewTestMine extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
