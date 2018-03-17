@@ -108,7 +108,7 @@ public class TabelViewTestMine extends Application {
 					try {
 						age = Integer.valueOf(txt3.getText());
 					} catch (Exception e) {
-						getAlert("추가 타입 오류", "나이에 숫자를 입력해주세요");
+						getAlert("나이 타입 오류", "나이에 숫자를 입력해주세요");
 						return;
 					}
 					
@@ -147,15 +147,33 @@ public class TabelViewTestMine extends Application {
 		// 수정 버튼 클릭
 		btn2.setOnAction(
 				event -> {
+					if (tableView.getSelectionModel().isEmpty()) {
+						getAlert("선택 오류", "클릭하신 행이 없습니다. 다시 클릭해주세요");
+						return;
+					}
+					
+					
 					String korName = txt1.getText();
 					String engName = txt2.getText();
 					String tel = txt4.getText();
 					String addr = txt5.getText();
-					int age = Integer.valueOf(txt3.getText());
 					
+					if (korName.isEmpty() || engName.isEmpty() || txt3.getText().isEmpty() || tel.isEmpty() || addr.isEmpty()) {
+						getAlert("수정 오류", "빈입력이 있습니다");
+						return;
+					}
 					
+					int age = 0;
+					try {
+						age = Integer.valueOf(txt3.getText());
+					} catch (Exception e) {
+						getAlert("나이 타입 오류", "나이에 숫자를 입력해주세요");
+						return;
+					}
 					
+					int index = tableView.getSelectionModel().getSelectedIndex();
 					
+					dataList.set(index, new MyMem(korName, engName, age, tel, addr));
 					
 				}
 		);
@@ -164,14 +182,16 @@ public class TabelViewTestMine extends Application {
 		// 삭제 버튼 클릭
 		btn3.setOnAction(
 				event -> {
+					if (tableView.getSelectionModel().isEmpty()) {
+						getAlert("선택 오류", "클릭하신 행이 없습니다. 다시 클릭해주세요");
+						return;
+					}
+					
+					int index = tableView.getSelectionModel().getSelectedIndex();
+					dataList.remove(index);
 					
 				}
 		);
-		
-		
-		
-		
-		
 		
 		
 		
