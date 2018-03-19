@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap 
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--
+	namespace는 이곳에 설정된 SQL문을 호출해서 사용할 때
+	같이 사용되는 이름이다
+	(자바에서 package와  비슷한 역할을 한다)
+-->
+<sqlMap namespace="zipSearch">
+	<typeAlias alias="zipVO" type="mvc.zipSearch.vo.ZipVO"/>
+	
+	<select id="getSearchDong" parameterClass="String" resultClass="ZipVO">
+		select * from ziptb where dong like '%' || #dong# ||'%'
+	</select>
+	
+	<select id="getSearchZipcode" parameterClass="String" resultClass="ZipVO">
+		select * from ziptb where zipcode like '%' || #zipcode# ||'%'
+	</select>
+	
+</sqlMap>
