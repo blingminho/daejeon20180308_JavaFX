@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap 
+	PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!--
+	namespace는 이곳에 설정된 SQL문을 호출해서 사용할 때
+	같이 사용되는 이름이다
+	(자바에서 package와  비슷한 역할을 한다)
+-->
+<sqlMap namespace="student">
+	<typeAlias alias="stuVO" type="chartAndDialog.vo.StudentVO"/>
+	
+	<select id="getStudentAll" resultClass="stuVO">
+		select * from mystudent
+	</select>
+	
+	<select id="checkedStudent" parameterClass="String" resultClass="stuVO">
+		select * from mystudent where stu_name = #ss#
+	</select>
+	
+	<insert id="insert" parameterClass="stuVO">
+		insert into mystudent(stu_name, stu_kor, stu_mat, stu_eng) values (#stu_name#, #stu_kor#, #stu_mat#, #stu_eng#)
+	</insert>
+	
+</sqlMap>

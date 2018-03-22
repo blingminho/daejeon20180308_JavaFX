@@ -52,6 +52,7 @@
 	-->
 	<sqlMap resource="mvc/zipSearch/dao/zipsearch.xml"/>
 	<sqlMap resource="mvc/homework/dao/member.xml"/>
+	<sqlMap resource="chartAndDialog/dao/student.xml"/>
 	<!-- 
 	<sqlMap resource="basic/mymember.xml"/>
 	<sqlMap resource="mvcTest/member.xml"/>
