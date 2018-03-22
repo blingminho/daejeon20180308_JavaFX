@@ -13,17 +13,19 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Side;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.Window;
 
 public class Controller_Main {
 	static StudentServiceInf service;
@@ -73,12 +75,41 @@ public class Controller_Main {
     	addStage.setTitle("추가");
     	addStage.setScene(addScene);
     	Controller_Add.setPrimaryStage(addStage);
+    	Controller_Add.setController(this);
     	addStage.show();
     	
     }
 
     @FXML
-    void onTableViewCliked(MouseEvent event) {
+    void onTableViewCliked(MouseEvent event) throws IOException {
+    	Stage pieChartStage = new Stage();
+    	Parent parent = FXMLLoader.load(getClass().getResource("../view/piechart.fxml"));
+    	PieChart pieChart = (PieChart) parent.lookup("#pieChart");
+    	
+    	ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
+    	StudentVO selectedStudentVO = tableView.getSelectionModel().getSelectedItem();
+    	
+    	ObservableList<TableColumn<StudentVO, ?>> columnsName = tableView.getColumns();
+    	pieChart.getData().add(new PieChart.Data(columnsName.get(1).getText(), selectedStudentVO.getStu_kor()));
+    	pieChart.getData().add(new PieChart.Data(columnsName.get(2).getText(), selectedStudentVO.getStu_eng()));
+    	pieChart.getData().add(new PieChart.Data(columnsName.get(3).getText(), selectedStudentVO.getStu_mat()));
+    	
+    	
+    	pieChart.setLabelLineLength(10);// 지시선 길이
+    	pieChart.setLegendSide(Side.BOTTOM);// 범례가 놓이는 위치 설정
+    	
+    	Button btn = (Button) parent.lookup("#btn");
+    	btn.setOnAction(e -> {
+    		pieChartStage.close();
+    	});
+    	
+    	Scene scene = new Scene(parent);
+    	
+    	pieChartStage.initModality(Modality.WINDOW_MODAL);
+    	pieChartStage.initOwner(parentStage);
+    	pieChartStage.setTitle("파이그래프");
+    	pieChartStage.setScene(scene);
+    	pieChartStage.show();
     	
     }
     
@@ -120,11 +151,14 @@ public class Controller_Main {
         
         obserList.addAll(list);
         tableView.setItems(obserList);
-        
-        
-        Controller_Add.setTableView(tableView);
-        
-        
+
+    }
+    
+    public void renewal() {
+    	List<StudentVO> list = service.getStudentAll();
+    	ObservableList<StudentVO> obserList = FXCollections.observableArrayList();
+    	obserList.addAll(list);
+    	tableView.setItems(obserList);
     }
     
 }

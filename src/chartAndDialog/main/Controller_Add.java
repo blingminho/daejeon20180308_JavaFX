@@ -21,15 +21,16 @@ public class Controller_Add {
 	static TableView<StudentVO> gettedTableView;
 	
 	private static Stage parentStage;
+	private static Controller_Main parentController;
+
+	public static void setController(Controller_Main controller) {
+		parentController = controller;
+	}
 	
 	public static void setPrimaryStage(Stage input_parentStage) {
 		parentStage = input_parentStage;
 	}
 	
-	
-	public static void setTableView(TableView<StudentVO> tableView) {
-		gettedTableView = tableView;
-	}
 	
 	
     @FXML
@@ -85,11 +86,7 @@ public class Controller_Add {
     	
     	System.out.println("학생 추가 result : " + result);
     	
-    	List<StudentVO> list = service.getStudentAll();
-    	ObservableList<StudentVO> obserList = FXCollections.observableArrayList();
-    	obserList.addAll(list);
-    	gettedTableView.setItems(obserList);
-    	
+    	parentController.renewal();
     	tf_name.clear();
     	tf_kor.clear();
     	tf_eng.clear();
